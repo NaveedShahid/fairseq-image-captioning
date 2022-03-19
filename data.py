@@ -106,7 +106,7 @@ class FeaturesDataset(FairseqDataset):
 
 
 class GridFeaturesDataset(FeaturesDataset):
-    def __init__(self, features_dir, image_ids, grid_shape=(8, 8)):
+    def __init__(self, features_dir, image_ids, grid_shape=(14, 14)):
         super().__init__(features_dir=features_dir,
                          image_ids=image_ids,
                          num_objects=np.ones(len(image_ids), dtype=np.int) * np.prod(grid_shape))
