@@ -62,14 +62,14 @@ def main(args):
     os.makedirs(args.output_dir, exist_ok=True)
 
     # Load annotations of MS-COCO training and validation set
-    annotations = load_annotations(args.ms_coco_dir)[:10000]
+    annotations = load_annotations(args.ms_coco_dir)
 
     # Read image ids of given split
-    image_ids = data.read_split_image_ids(args.split)[:10000]
+    image_ids = data.read_split_image_ids(args.split)
 
     # Select captions and their image IDs from annotations
     captions, caption_image_ids = select_captions(annotations, image_ids)
-
+    captions, caption_image_ids = captions[:10000], caption_image_ids[:10000]
     print('Tokenize captions ...')
     captions = tokenize_captions(tqdm.tqdm(captions))
 
