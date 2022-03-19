@@ -62,10 +62,10 @@ def main(args):
     os.makedirs(args.output_dir, exist_ok=True)
 
     # Load annotations of MS-COCO training and validation set
-    annotations = load_annotations(args.ms_coco_dir)[:1000]
+    annotations = load_annotations(args.ms_coco_dir)[:8000]
 
     # Read image ids of given split
-    image_ids = data.read_split_image_ids(args.split)[:1000]
+    image_ids = data.read_split_image_ids(args.split)[:8000]
 
     # Select captions and their image IDs from annotations
     captions, caption_image_ids = select_captions(annotations, image_ids)
