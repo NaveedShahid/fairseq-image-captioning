@@ -71,7 +71,10 @@ class FeaturesDataset(FairseqDataset):
         self.num_objects = num_objects
 
     def __getitem__(self, index):
-        return self.read_data(self.image_ids[index])
+        try: 
+            return self.read_data(self.image_ids[index])
+        except Exception as e:
+            ss=1+1
 
     def __len__(self):
         return len(self.image_ids)
