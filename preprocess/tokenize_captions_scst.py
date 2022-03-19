@@ -20,10 +20,10 @@ def tokenize_captions(output_dir, split, coco):
 
 
 def load_captions_merge(coco_dir):
-    with open(os.path.join(coco_dir, 'annotations', f'captions_train2014.json')) as f:
+    with open(os.path.join(coco_dir, 'annotations', f'captions_train2017.json')) as f:
         captions = json.load(f)
 
-    with open(os.path.join(coco_dir, 'annotations', f'captions_val2014.json')) as f:
+    with open(os.path.join(coco_dir, 'annotations', f'captions_val2017.json')) as f:
         captions_val = json.load(f)
 
     captions['type'] = 'captions'
