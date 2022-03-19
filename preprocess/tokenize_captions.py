@@ -69,7 +69,8 @@ def main(args):
 
     # Select captions and their image IDs from annotations
     captions, caption_image_ids = select_captions(annotations, image_ids)
-    captions, caption_image_ids = captions[:10000], caption_image_ids[:10000]
+    if args.split == 'train' or args.split == 'valid':
+        captions, caption_image_ids = captions[:10000], caption_image_ids[:10000]
     print('Tokenize captions ...')
     captions = tokenize_captions(tqdm.tqdm(captions))
 
