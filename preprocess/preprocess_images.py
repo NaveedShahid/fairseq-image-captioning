@@ -18,6 +18,7 @@ transform = lambda x: feature_extractor(images=x, return_tensors="pt")
 
 def main(args):
     image_ids, image_paths = read_split_image_ids_and_paths(args.split)
+    image_ids, image_paths = image_ids[:1000], image_paths[:1000]
     image_paths = [os.path.join(args.ms_coco_dir, image_path) for image_path in image_paths]
     features_dir = os.path.join(args.output_dir, f'{args.split}-features-grid')
 
