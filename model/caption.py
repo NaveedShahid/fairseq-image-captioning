@@ -68,7 +68,7 @@ class TransformerCaptioningEncoder(transformer.TransformerEncoder):
         if self.spatial_encoding is not None:
             x += self.spatial_encoding(src_locations)
 
-        x = F.dropout(x, p=self.dropout, training=self.training)
+        x = F.dropout(x, p=args.dropout, training=self.training)
 
         # B x T x C -> T x B x C
         x = x.transpose(0, 1)
