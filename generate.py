@@ -74,11 +74,14 @@ def predict(image_id_path: str,
 
     prediction_ids = []
     prediction_results = []
-
+    errors=0
+    print(len(sample_ids))
     for sample_id in tqdm(sample_ids):
         try:
             features, locations = image_ds.read_data(sample_id)
-        except: continue
+        except: 
+            errors+=1
+            continue
         length = features.shape[0]
 
         if use_cuda:
@@ -98,7 +101,7 @@ def predict(image_id_path: str,
 
         prediction_ids.append(sample_id)
         prediction_results.append(prediction)
-
+    print(errors)
     return pd.DataFrame.from_dict(data={
         'image_id': prediction_ids,
         'caption': prediction_results
