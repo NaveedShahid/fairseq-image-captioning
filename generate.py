@@ -77,11 +77,8 @@ def predict(image_id_path: str,
     errors=0
     print(len(sample_ids))
     for sample_id in tqdm(sample_ids):
-        try:
-            features, locations = image_ds.read_data(sample_id)
-        except: 
-            errors+=1
-            continue
+        print(sample_id)
+        features, locations = image_ds.read_data(sample_id)
         length = features.shape[0]
 
         if use_cuda:
