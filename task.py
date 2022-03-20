@@ -64,7 +64,7 @@ class CaptioningTask(FairseqTask):
                 if int(i.split('.')[0]) in image_ids:
                     image_ids_new.append(int(i.split('.')[0]))
             image_ids = image_ids_new
-            print(len(image_ids)
+            print(len(image_ids))
             image_ds = data.GridFeaturesDataset(features_dir, image_ids, grid_shape=(14, 14))
         elif self.args.features == 'obj':
             image_metadata_file = os.path.join(features_dir, 'metadata.csv')
