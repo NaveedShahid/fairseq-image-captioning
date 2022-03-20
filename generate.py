@@ -61,7 +61,6 @@ def predict(image_id_path: str,
 
     sample_ids = data.read_image_ids(model_args.input, non_redundant=True)
     image_ids = data.read_image_ids(image_id_path)
-    image_ids = [i for i in image_ids if i in sample_ids]
     assert_sample_id_validity(sample_ids, image_ids)
 
     if model_args.features == 'grid':
@@ -71,11 +70,11 @@ def predict(image_id_path: str,
         image_ds = data.ObjectFeaturesDataset(obj_features_path, image_ids, image_md)
     else:
         raise ValueError(f'Invalid --features option: {model_args.features}')
-
+    
+    sample_ids = [int(i.split('.')[0]) for i in os.listdir(grid_features_path)]
     prediction_ids = []
     prediction_results = []
     errors=0
-    print(len(sample_ids))
     for sample_id in tqdm(sample_ids):
         print(sample_id)
         features, locations = image_ds.read_data(sample_id)
