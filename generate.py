@@ -61,7 +61,8 @@ def predict(image_id_path: str,
 
     sample_ids = data.read_image_ids(model_args.input, non_redundant=True)
     image_ids = data.read_image_ids(image_id_path)
-
+    print(len(sample_ids))
+    print(len(image_ids))
     assert_sample_id_validity(sample_ids, image_ids)
 
     if model_args.features == 'grid':
