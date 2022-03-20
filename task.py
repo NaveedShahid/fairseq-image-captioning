@@ -59,7 +59,11 @@ class CaptioningTask(FairseqTask):
             captions_ds = data_utils.load_indexed_dataset(captions_file, self.captions_dict)
 
         if self.args.features == 'grid':
-            image_ids = [i for i in os.listdir(features_dir) if int(i.split('.')[0]) in image_ids]
+            image_ids_new = []
+            for i in os.listdir(features_dir):
+                if int(i.split('.')[0]) in image_ids:
+                    image_ids_new.append(int(i.split('.')[0]))
+            image_ids = image_ids_new
             print(len(image_ids)
             image_ds = data.GridFeaturesDataset(features_dir, image_ids, grid_shape=(14, 14))
         elif self.args.features == 'obj':
