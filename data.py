@@ -66,7 +66,6 @@ class ImageDataset(torch.utils.data.Dataset):
 
 class FeaturesDataset(FairseqDataset):
     def __init__(self, features_dir, image_ids, num_objects):
-        image_ids = [i for i in os.listdir(features_dir) if int(i.split('.')[0]) in image_ids]
         self.features_dir = features_dir
         self.image_ids = image_ids
         
