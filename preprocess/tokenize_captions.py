@@ -3,6 +3,7 @@ import data
 import json
 import os
 import tqdm
+import pandas as pd
 
 from sacremoses import MosesTokenizer
 
@@ -62,13 +63,17 @@ def main(args):
     os.makedirs(args.output_dir, exist_ok=True)
 
     # Load annotations of MS-COCO training and validation set
-    annotations = load_annotations(args.ms_coco_dir)
+#     annotations = load_annotations(args.ms_coco_dir)
 
     # Read image ids of given split
-    image_ids = data.read_split_image_ids(args.split)
+#     image_ids = data.read_split_image_ids(args.split)
 
     # Select captions and their image IDs from annotations
-    captions, caption_image_ids = select_captions(annotations, image_ids)
+#     captions, caption_image_ids = select_captions(annotations, image_ids)
+    
+    df = pd.read_csv('../input/flickr8k/captions.txt')
+    captions, caption_image_ids = df['caption'], df['image'].str.split('.').apply(lambda x: x[0])
+    
 #     if args.split == 'train' or args.split == 'valid':
 #         captions, caption_image_ids = captions[:10000], caption_image_ids[:10000]
     print('Tokenize captions ...')
