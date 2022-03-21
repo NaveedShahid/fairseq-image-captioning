@@ -63,28 +63,28 @@ def main(args):
     os.makedirs(args.output_dir, exist_ok=True)
 
     # Load annotations of MS-COCO training and validation set
-#     annotations = load_annotations(args.ms_coco_dir)
+    annotations = load_annotations(args.ms_coco_dir)
 
     # Read image ids of given split
-#     image_ids = data.read_split_image_ids(args.split)
+    image_ids = data.read_split_image_ids(args.split)
 
     # Select captions and their image IDs from annotations
-#     captions, caption_image_ids = select_captions(annotations, image_ids)
+    captions, caption_image_ids = select_captions(annotations, image_ids)
     
-    df = pd.read_csv(args.ms_coco_dir)
-    train_df, test_df = train_test_split(df, train_size=0.9, shuffle=True)
-    train_df, val_df = train_test_split(train_df, train_size=0.9, shuffle=True)
+#     df = pd.read_csv(args.ms_coco_dir)
+#     train_df, test_df = train_test_split(df, train_size=0.9, shuffle=True)
+#     train_df, val_df = train_test_split(train_df, train_size=0.9, shuffle=True)
     
-    if args.split == 'train':
-        df = train_df
-    elif args.split == 'test':
-        df = test_df
-    else:
-        df = val_df
-    captions, caption_image_ids = df['caption'], df['image'].str.split('.').apply(lambda x: x[0])
+#     if args.split == 'train':
+#         df = train_df
+#     elif args.split == 'test':
+#         df = test_df
+#     else:
+#         df = val_df
+#     captions, caption_image_ids = df['caption'], df['image'].str.split('.').apply(lambda x: x[0])
     
-#     if args.split == 'train' or args.split == 'valid':
-#         captions, caption_image_ids = captions[:10000], caption_image_ids[:10000]
+    if args.split == 'train' or args.split == 'valid':
+        captions, caption_image_ids = captions[:10000], caption_image_ids[:10000]
     print('Tokenize captions ...')
     captions = tokenize_captions(tqdm.tqdm(captions))
 
