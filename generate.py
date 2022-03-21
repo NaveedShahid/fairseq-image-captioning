@@ -94,9 +94,10 @@ def predict(image_id_path: str,
 
         translations = task.inference_step(generator, models, sample)
         prediction = decode(captions_dict.string(translations[0][0]['tokens']))
-
         prediction_ids.append(sample_id)
         prediction_results.append(prediction)
+        print(prediction)
+
     print(errors)
     return pd.DataFrame.from_dict(data={
         'image_id': prediction_ids,
