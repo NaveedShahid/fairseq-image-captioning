@@ -24,7 +24,7 @@ model_name = 'google/vit-base-patch16-224'
 feature_extractor = ViTFeatureExtractor.from_pretrained(model_name)
 model = ViTModel.from_pretrained(model_name)
 model.eval()
-model.to(args.device)
+model.to(torch.device('cuda:0'))
 transform = lambda x: feature_extractor(images=x, return_tensors="pt")
 
 def split_file(split):
