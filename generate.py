@@ -48,7 +48,7 @@ def predict(image_id_path: str,
         if torch.cuda.is_available() and not model_args.cpu:
             model.cuda()
 
-    generator = task.build_generator(model_args)
+    generator = task.build_generator(models,model_args)
     tokenizer = encoders.build_tokenizer(model_args)
     bpe = encoders.build_bpe(model_args)
 
