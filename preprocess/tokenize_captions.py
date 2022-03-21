@@ -4,7 +4,7 @@ import json
 import os
 import tqdm
 import pandas as pd
-
+from sklearn.model_selection import train_test_split
 from sacremoses import MosesTokenizer
 
 
@@ -71,7 +71,16 @@ def main(args):
     # Select captions and their image IDs from annotations
 #     captions, caption_image_ids = select_captions(annotations, image_ids)
     
-    df = pd.read_csv('../input/flickr8k/captions.txt')
+    df = pd.read_csv(args.ms_coco_dir)
+    train_df, test_df = train_test_split(df, train_size=0.9, shuffle=True)
+    train_df, val_df = train_test_split(train_df, train_size=0.9, shuffle=True)
+    
+    if args.split == 'train':
+        df = train_df
+    elif args.split == 'test':
+        df = test_df
+    else:
+        df = val_df
     captions, caption_image_ids = df['caption'], df['image'].str.split('.').apply(lambda x: x[0])
     
 #     if args.split == 'train' or args.split == 'valid':
