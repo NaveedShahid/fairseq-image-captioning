@@ -19,14 +19,6 @@ import numpy as np
 from torchvision import transforms
 from transformers import ViTForImageClassification, ViTFeatureExtractor, ViTModel
 
-model_name = 'google/vit-base-patch16-224'
-
-feature_extractor = ViTFeatureExtractor.from_pretrained(model_name)
-model = ViTModel.from_pretrained(model_name)
-model.eval()
-model.to(torch.device('cuda:0'))
-transform = lambda x: feature_extractor(images=x, return_tensors="pt")
-
 def split_file(split):
     return os.path.join('splits', f'karpathy_{split}_images.txt')
 
@@ -134,24 +126,9 @@ class GridFeaturesDataset(FeaturesDataset):
         self.locations = self.tile_locations(grid_shape)
 
     def read_data(self, image_id):
-        image_path = os.path.join('/kaggle/input/',features_dir.split('/')[-1].split('-features-')[0]+'2017')
-        for i in os.listdir(image_path):
-            if str(image_id) in i:
-                image_path = i
-                break
-        with Image.open(image_path).convert('RGB') as img:
-            imgs, ids = transform(img), image_id
-
-        with torch.no_grad():
-            outputs = model(imgs['pixel_values'].squeeze().to(args.device))
-            last_hidden_states = outputs.last_hidden_state
-            # outs = inception(imgs.to(args.device)).permute(0, 2, 3, 1).view(-1, 64, 2048)
-            for out, id in zip(last_hidden_states, ids):
-                out = out.cpu().numpy()[:196,:]
-                id = str(id.item())
-            features = out
+        features_file = os.path.join(self.features_dir, f'{image_id}.npy')
+        features = np.load(features_file)
         return torch.as_tensor(features), self.locations
-
     @staticmethod
     def tile_locations(grid_shape):
         num_tiles = np.prod(grid_shape)
