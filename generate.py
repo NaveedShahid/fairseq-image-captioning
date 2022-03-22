@@ -6,7 +6,7 @@ import pandas as pd
 from fairseq import options, tasks, checkpoint_utils
 from fairseq.data import encoders
 from tqdm import tqdm
-
+import matplotlib.pyplot import plt
 import data
 
 
@@ -76,7 +76,6 @@ def predict(image_id_path: str,
     prediction_results = []
     errors=0
     for sample_id in tqdm(sample_ids):
-        print(sample_id)
         features, locations = image_ds.read_data(sample_id)
         length = features.shape[0]
 
@@ -96,7 +95,10 @@ def predict(image_id_path: str,
         prediction = decode(captions_dict.string(translations[0][0]['tokens']))
         prediction_ids.append(sample_id)
         prediction_results.append(prediction)
-        print(prediction)
+        print(f'(
+        image_id: {sample_id},
+        caption: {prediction}
+)')
 
     print(errors)
     return pd.DataFrame.from_dict(data={
