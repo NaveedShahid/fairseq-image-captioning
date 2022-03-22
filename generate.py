@@ -95,10 +95,7 @@ def predict(image_id_path: str,
         prediction = decode(captions_dict.string(translations[0][0]['tokens']))
         prediction_ids.append(sample_id)
         prediction_results.append(prediction)
-        print(f'(
-        image_id: {sample_id},
-        caption: {prediction}
-)')
+        print(f'(image_id: {sample_id}, caption: {prediction})')
 
     print(errors)
     return pd.DataFrame.from_dict(data={
