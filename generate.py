@@ -6,7 +6,7 @@ import pandas as pd
 from fairseq import options, tasks, checkpoint_utils
 from fairseq.data import encoders
 from tqdm import tqdm
-import matplotlib.pyplot import plt
+import matplotlib.pyplot as plt
 import data
 
 
