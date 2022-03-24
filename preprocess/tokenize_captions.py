@@ -83,8 +83,8 @@ def main(args):
 #         df = val_df
 #     captions, caption_image_ids = df['caption'], df['image'].str.split('.').apply(lambda x: x[0])
     
-    if args.split == 'train' or args.split == 'valid':
-        captions, caption_image_ids = captions[:10000], caption_image_ids[:10000]
+#     if args.split == 'train' or args.split == 'valid':
+#         captions, caption_image_ids = captions[:10000], caption_image_ids[:10000]
     print('Tokenize captions ...')
     captions = tokenize_captions(tqdm.tqdm(captions))
 
