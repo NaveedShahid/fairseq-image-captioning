@@ -93,7 +93,7 @@ class CaptioningModel(BaseFairseqModel):
     @staticmethod
     def add_args(parser):
         transformer.TransformerModel.add_args(parser)
-        parser.add_argument('--features-dim', type=int, default=768,
+        parser.add_argument('--features-dim', type=int, default=1024,
                             help='visual features dimension')
         parser.add_argument('--feature-spatial-encoding', default=False, action='store_true',
                             help='use feature spatial encoding')
