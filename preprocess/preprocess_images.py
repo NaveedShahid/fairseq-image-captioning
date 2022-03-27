@@ -10,7 +10,7 @@ from data import ImageDataset, read_split_image_ids_and_paths
 
 from transformers import ViTForImageClassification, ViTFeatureExtractor, ViTModel
 
-model_name = 'google/vit-base-patch16-224'
+model_name = 'google/vit-large-patch16-224-in21k'
 
 feature_extractor = ViTFeatureExtractor.from_pretrained(model_name)
 model = ViTModel.from_pretrained(model_name)
@@ -65,7 +65,7 @@ if __name__ == '__main__':
                         help='Output directory.')
     parser.add_argument('--device', default='cuda', type=torch.device,
                         help="Device to use ('cpu', 'cuda', ...).")
-    parser.add_argument('--batch-size', default=8, type=int,
+    parser.add_argument('--batch-size', default=16, type=int,
                         help="Image batch size.")
     parser.add_argument('--num-workers', default=0, type=int,
                         help="Number of data loader workers.")
