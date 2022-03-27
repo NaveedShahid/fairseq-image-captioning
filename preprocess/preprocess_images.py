@@ -10,7 +10,7 @@ from data import ImageDataset, read_split_image_ids_and_paths
 
 from transformers import ViTForImageClassification, ViTFeatureExtractor, ViTModel
 
-model_name = 'google/vit-large-patch16-224-in21k'
+model_name = 'google/vit-base-patch32-224-in21k'
 
 feature_extractor = ViTFeatureExtractor.from_pretrained(model_name)
 model = ViTModel.from_pretrained(model_name)
